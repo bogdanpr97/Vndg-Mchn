@@ -1,7 +1,6 @@
 backend/node_modules/
-backend/.env
+backend/config/config.env
 backend/.DS_Store
-backend/config/default.json
 node_modules/
 .env
 .DS_Store
