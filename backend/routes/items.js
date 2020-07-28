@@ -7,10 +7,11 @@ router
   .route('/')
   .get(getItems)
   .post(addItem)
-  .put(updateQuantity);
+  
 
 router
   .route('/:id')
-  .delete(deleteItem)
+  .put(updateQuantity)
+  .delete(deleteItem);
 
 module.exports = router;

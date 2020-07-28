@@ -2,7 +2,6 @@ const Item = require("../models/Item");
 
 // @desc Get all items
 // @route GET /api/v1/items
-// @access public
 exports.getItems = async (req, res, next) => {
   try {
     const items = await Item.find();
@@ -22,12 +21,11 @@ exports.getItems = async (req, res, next) => {
 
 // @desc Add Item
 // @route POST /api/v1/items
-// @access Public
 exports.addItem = async (req, res, next) => {
   try {
     const { name, image, description, price, quantity = 1 } = req.body;
     
-    const item = await Item.findOne({ name: name });
+    const item = await Item.findOne({ name });
     
     // if item already in db
     if(item) {
@@ -56,13 +54,12 @@ exports.addItem = async (req, res, next) => {
 };
 
 // @desc Edit Item
-// @route PUT /api/v1/items
-// @access Public
+// @route PUT /api/v1/items/:id
 exports.updateQuantity = async (req, res, next) => {
-  const { quantity, name } = req.body;
+  const { quantity } = req.body;
 
   try {
-    const item = await Item.findOne({ name: name });
+    const item = await Item.findById(req.params.id);
     
     if(!item) {
       return res.status(404).send("Item not found");
@@ -83,8 +80,7 @@ exports.updateQuantity = async (req, res, next) => {
 
 
 // @desc Delete Item - called only when the quantity is 0
-// @route DELETE api/v1/items/:item_id
-// @access Public
+// @route DELETE api/v1/items/:id
 exports.deleteItem = async (req, res) => {
   try {
     const item = await Item.findById(req.params.id);

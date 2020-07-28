@@ -1,4 +1,4 @@
-const path =require('path');
+const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
@@ -16,7 +16,7 @@ connectDB();
 
 // routes
 app.use('/api/v1/users', require('./routes/users'));
-app.use('/api/v1/auth', require('./routes/api/auth'));
+app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/items', require('./routes/items'));
 app.get("/", (req, res) => res.send("Hello world"));
 
