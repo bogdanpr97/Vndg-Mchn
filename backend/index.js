@@ -15,9 +15,9 @@ app.use(express.urlencoded({ extended: false }));
 connectDB();
 
 // routes
-// app.use('/api/v1/users', require('./routes/users'));
-// app.use('/api/v1/auth', require('./routes/api/auth'));
-// app.use('/api/v1/items', require('./routes/items'));
+app.use('/api/v1/users', require('./routes/users'));
+app.use('/api/v1/auth', require('./routes/api/auth'));
+app.use('/api/v1/items', require('./routes/items'));
 app.get("/", (req, res) => res.send("Hello world"));
 
 // if(process.env.NODE_ENV === 'production') {
