@@ -1,0 +1,36 @@
+.navbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  box-shadow: black 2px -2px 20px 0px;
+  background-color: var(--light-color);
+  margin-bottom: 10px;
+}
+
+.navbar-title-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.navbar-title {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+
+.navbar-text {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.link-button {
+  text-decoration: none;
+  margin-left: 15px;
+  border-bottom: 1px solid rgba(1,1,1,0.2);
+}
+
+.link-text {
+  font-size: 2rem;
+  color: var(--primary-color);
+}
