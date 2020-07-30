@@ -27,15 +27,15 @@ const Register = ({ register, isAuthenticated }) => {
       <form className="form" onSubmit={handleSubmit}>
       <label className="form-group">
           Name:
-          <input type="text" value={name} onChange={nameOnChange} />
+          <input  autoComplete="new-password" type="text" value={name} onChange={nameOnChange} />
         </label>
         <label className="form-group">
           Email:
-          <input type="text" value={email} onChange={emailOnChange} />
+          <input  autoComplete="new-password" type="text" value={email} onChange={emailOnChange} />
         </label>
         <label className="form-group">
           Password:
-          <input type="password" value={password} onChange={passwordOnChange} />
+          <input autoComplete="new-password" type="password" value={password} onChange={passwordOnChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
