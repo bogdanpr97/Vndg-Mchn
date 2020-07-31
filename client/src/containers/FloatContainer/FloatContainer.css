@@ -1,5 +1,4 @@
 .float-container {
-  height: 50%;
   width: 30%;
   border-radius: 4%;
   display: flex;
@@ -9,4 +8,5 @@
   background-color: var(--light-color);
   color: var(--dark-color);
   box-shadow: 5px 5px 20px 0px;
+  padding-bottom: 20px;
 }

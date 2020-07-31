@@ -2,10 +2,10 @@ import React from 'react'
 
 import './FloatContainer.css';
 
-const FloatContainer = (props) => {
+const FloatContainer = ({ children, className }) => {
   return (
-    <div className="float-container">
-      {props.children}
+    <div className={`float-container ${className}`}>
+      {children}
     </div>
   )
 }

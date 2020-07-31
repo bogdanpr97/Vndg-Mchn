@@ -15,6 +15,7 @@ import store from "./store";
 import { Provider } from "react-redux";
 import { loadUser } from "./actions/auth";
 import setAuthToken from "./utils/setAuthToken";
+import PrivateRoute from "./components/routing/PrivateRoute";
 
 function App() {
   useEffect(() => {
@@ -30,10 +31,10 @@ function App() {
           <div className="content-container">
             <Alert />
             <Switch>
-              <Route exact path="/" component={Main} />
+              <PrivateRoute exact path="/" component={Main} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/items" component={AddItem} />
+              <PrivateRoute exact path="/items" component={AddItem} />
             </Switch>
           </div>
         </div>

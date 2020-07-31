@@ -24,6 +24,22 @@ body {
   margin: 0;
 }
 
+.fill-flex {
+  flex: 1;
+}
+
+.w-50 {
+  width: 50% !important;
+}
+
+.w-60 {
+  width: 60% !important;
+}
+
+.w-70 {
+  width: 70% !important;
+}
+
 .app-container {
   height: 100%;
   display: flex;

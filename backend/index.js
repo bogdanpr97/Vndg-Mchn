@@ -2,7 +2,6 @@ const path = require('path');
 const express = require('express');
 const dotenv = require('dotenv');
 const connectDB = require('./config/db');
-
 dotenv.config({ path: './config/config.env'});
 
 const app = express();
@@ -19,6 +18,7 @@ app.use('/api/v1/users', require('./routes/users'));
 app.use('/api/v1/auth', require('./routes/auth'));
 app.use('/api/v1/items', require('./routes/items'));
 app.get("/", (req, res) => res.send("Hello world"));
+app.use(express.static(path.join(__dirname, "./public/")));
 
 // if(process.env.NODE_ENV === 'production') {
 //   app.use(express.static('client/build'));

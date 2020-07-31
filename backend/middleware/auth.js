@@ -8,8 +8,6 @@ module.exports = function(req, res, next) {
   }
 
   try {
-    console.log(token);
-    console.log(process.env.JWT_SECRET);
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
