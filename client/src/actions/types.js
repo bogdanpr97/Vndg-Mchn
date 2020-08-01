@@ -12,3 +12,6 @@ export const ITEM_POST_SUCCESS = 'ITEM_POST_SUCCESS';
 export const ITEM_POST_FAIL = 'ITEM_POST_FAIL';
 export const SET_ITEMS = 'SET_ITEMS';
 export const SET_ITEMS_FAIL = 'SET_ITEMS_FAIL';
+
+export const ITEM_UPDATE_QUANT = 'ITEM_UPDATE_QUANT';
+export const ITEM_UPDATE_FAIL = 'ITEM_UPDATE_FAIL';

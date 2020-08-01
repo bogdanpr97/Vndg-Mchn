@@ -22,7 +22,6 @@ exports.addItem = (req, res) => {
     //  console.log("Request file ---", req.file);//Here you get file.
      const { name, description, price, quantity = 1, slotRow, slotColumn } = req.body;
      try {
-      console.log(req.file.filename);
       const image = { 
         data: fs.readFileSync(path.join(__dirname + '/../public/' + req.file.filename)), 
         contentType: 'image/png'
@@ -31,11 +30,17 @@ exports.addItem = (req, res) => {
        const item = await Item.findOne({ name });
     
       // if item already in db
-      if(item) {
-        return res.status(303).send("Item with that name already in vending machine");
-      }
+       if (item) {
+         return res.status(303).json({
+           errors: [
+             {
+               msg: "Item with that name already in vending machine"
+             }
+           ]
+         })
+       }
 
-      if(slotColumn < 0 || slotRow < 0 || slotColumn > 3 || slotRow > 4 ) {
+      if(slotColumn < 0 || slotRow < 0 || slotColumn > 4 || slotRow > 3 ) {
         return res.status(400).send("Wrong Slots Params");
       }
        

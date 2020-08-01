@@ -5,6 +5,7 @@ import { postItem, getItems } from '../../../actions/item';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PickSlot from '../../reusables/PickSlot/PickSlot';
+import './AddNew.css';
 
 const AddNew = ({ postItem, getItems }) => {
   const { value: name, onChange: nameOnChange } = useInput('');
@@ -79,7 +80,7 @@ const AddNew = ({ postItem, getItems }) => {
               />
           </label>
           <PickSlot selectSlot={onSlotChange} pickedSlot={pickedSlot}/>
-          <input type="submit" value="Submit" />
+          <input className="send-input" type="submit" value="Submit" />
         </form>
       </FloatContainer>
     </div>

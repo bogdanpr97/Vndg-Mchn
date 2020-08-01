@@ -29,9 +29,12 @@ const PickSlot = ({ item: { slots }, selectSlot, pickedSlot }) => {
   };
 
   return (
-    <div className="picker-container">
-      {[...renderSquares()]}
-    </div>
+    <>
+      <h2 style={{ textAlign: "center"}}>Pick a slot</h2>
+      <div className="picker-container">
+        {[...renderSquares()]}
+      </div>
+    </>
   )
 }
 
