@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { SLOTS_WIDTH, SLOTS_HEIGHT } from '../../../contants';
 import './PickSlot.css';
 
 const PickSlot = ({ item: { slots }, selectSlot, pickedSlot }) => {
-  const [select, changeSelected] = useState({});
 
   const renderSquares = () => {
     const squares = [];
     if(!slots) return squares;
-    for(let i = 0; i < SLOTS_WIDTH; i++) {
-      for(let j = 0; j < SLOTS_HEIGHT; j++) {
+    for(let i = 0; i < SLOTS_HEIGHT; i++) {
+      for(let j = 0; j < SLOTS_WIDTH; j++) {
         const isItemSelected = pickedSlot.row === i && pickedSlot.column === j;
         const classNameForSelected = isItemSelected ? 'selected' : '';
-        if(slots[i][j] === 1) {
+        if(slots[i][j]) {
           squares.push(<div className={`slot slot-used ${classNameForSelected}`}>{i}-{j}</div>);
         } else {
           squares.push(<div 

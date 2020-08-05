@@ -136,7 +136,12 @@ exports.updateQuantity = async (req, res, next) => {
     if(!item) {
       return res.status(404).send("Item not found");
     }
-
+    if(quantity > 5) {
+      return res.status(400).json({
+        success: false,
+        errors: [ {msg: `No space left for ${item.name}`}]
+      });
+    }
     item.quantity = quantity;
 
     await item.save();

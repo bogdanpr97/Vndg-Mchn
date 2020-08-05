@@ -6,15 +6,25 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import PickSlot from '../../reusables/PickSlot/PickSlot';
 import './AddNew.css';
+import { isEmpty } from 'ramda';
+import { setAlert } from '../../../actions/alert';
 
-const AddNew = ({ postItem, getItems }) => {
-  const { value: name, onChange: nameOnChange } = useInput('');
-  const { value: description, onChange: descriptionOnChange } = useInput('');
-  const { value: price, onChange: priceOnChange } = useInput('');
-  const [pickedSlot, setPickedSlot] = useState({ row: null, column: null });
+const AddNew = ({ postItem, getItems, setAlert }) => {
+  const { value: name, onChange: nameOnChange, reset: nameReset } = useInput('');
+  const { value: description, onChange: descriptionOnChange, reset: descReset } = useInput('');
+  const { value: price, onChange: priceOnChange, reset: priceReset } = useInput('');
+  const [pickedSlot, setPickedSlot] = useState({});
   const [file, setFile] = useState('');
 
-  function onFileChangeHandler(e) {
+  function reset() {
+    nameReset();
+    descReset();
+    priceReset();
+    setPickedSlot({});
+    setFile(null);
+  }
+
+  function onFileChangeHandler(e) { 
     setFile(e.target.files[0]);
   }
 
@@ -28,15 +38,20 @@ const AddNew = ({ postItem, getItems }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append('image', file);
-    formData.append('name', name);
-    formData.append('description', description);
-    formData.append('slotRow', pickedSlot.row);
-    formData.append('slotColumn', pickedSlot.column);
-    formData.append('price', price);
 
-    postItem(formData);
+    if (isEmpty(pickedSlot)) {
+      setAlert("Please pick a slot", 'danger');
+    } else {
+      const formData = new FormData();
+      formData.append("image", file);
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("slotRow", pickedSlot.row);
+      formData.append("slotColumn", pickedSlot.column);
+      formData.append("price", price);
+
+      postItem(formData).then(() => reset());
+    }
   }
 
   return (
@@ -51,6 +66,7 @@ const AddNew = ({ postItem, getItems }) => {
               type="text" 
               value={name} 
               onChange={nameOnChange} 
+              required
             />
           </label>
           <label className="form-group">
@@ -59,6 +75,7 @@ const AddNew = ({ postItem, getItems }) => {
               autoComplete="new-password" 
               type="text" value={description} 
               onChange={descriptionOnChange} 
+              required
             />
           </label>
           <label className="form-group">
@@ -67,6 +84,7 @@ const AddNew = ({ postItem, getItems }) => {
               autoComplete="new-password" 
               type="number" value={price}
                onChange={priceOnChange} 
+               required
             />
           </label>
           <label className="form-group">
@@ -77,6 +95,7 @@ const AddNew = ({ postItem, getItems }) => {
                 onChange={onFileChangeHandler}
                 id="input-files"
                 className="form-control-file border"
+                required
               />
           </label>
           <PickSlot selectSlot={onSlotChange} pickedSlot={pickedSlot}/>
@@ -89,9 +108,10 @@ const AddNew = ({ postItem, getItems }) => {
 
 AddNew.propTypes = {
   postItem: PropTypes.func,
+  setAlert: PropTypes.func,
   items: PropTypes.array,
   getItems: PropTypes.func.isRequired
 }
 
 
-export default connect(null, { postItem, getItems })(AddNew);
+export default connect(null, { postItem, getItems, setAlert })(AddNew);

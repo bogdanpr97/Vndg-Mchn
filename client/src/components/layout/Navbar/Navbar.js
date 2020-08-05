@@ -6,13 +6,14 @@ import { logout } from '../../../actions/auth';
 
 import './Navbar.css';
 
-const Navbar = ({ auth: { loading, isAuthenticated }, logout }) => {
+const Navbar = ({ auth: { loading, isAuthenticated, user }, logout }) => {
   const guestLinks = [
     <Link className="link-button" to="/login"><span className="link-text">Login</span></Link>,
     <Link className="link-button" to="/register"><span className="link-text">Register</span></Link>
   ];
 
   const userLinks = [
+    <div className="money" >Money: <span className="money-value">{user ? user.totalMoney : 0}$</span></div>,
     <Link className="link-button" to="/items"><span className="link-text">Add Items</span></Link>,
     <a href="/" className="link-button" onClick={logout} ><span className="link-text">Logout</span></a>
   ];

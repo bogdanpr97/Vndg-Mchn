@@ -4,13 +4,14 @@ import {
   AUTH_ERROR,
   LOGIN_SUCCESS,
   LOGOUT,
+  CHANGE_MONEY
 } from '../actions/types';
 
 const initialState = {
   token: localStorage.getItem('token'),
   isAuthenticated: null,
   loading: true,
-  user: null
+  user: {}
 };
 
 export default function (state = initialState, action) {
@@ -36,6 +37,14 @@ export default function (state = initialState, action) {
         ...payload,
         isAuthenticated: true,
         loading: false
+      }
+    case CHANGE_MONEY:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          totalMoney: payload.value
+        }
       }
     case AUTH_ERROR:
     case LOGOUT:

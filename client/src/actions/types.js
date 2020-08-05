@@ -15,3 +15,8 @@ export const SET_ITEMS_FAIL = 'SET_ITEMS_FAIL';
 
 export const ITEM_UPDATE_QUANT = 'ITEM_UPDATE_QUANT';
 export const ITEM_UPDATE_FAIL = 'ITEM_UPDATE_FAIL';
+
+export const ITEM_DELETED = 'ITEM_DELETED';
+export const ITEM_DELETED_FAIL = 'ITEM_DELETED_FAIL';
+
+export const CHANGE_MONEY = 'CHANGE_MONEY';

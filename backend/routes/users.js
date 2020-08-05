@@ -1,5 +1,6 @@
 const express = require('express');
 const { getAllUsers, addUser, getUserById, updateTotal } = require('../controllers/users');
+const auth = require('../middleware/auth');
 
 const router = express.Router();
 const { check } = require('express-validator');
@@ -21,6 +22,6 @@ router.post(
 router.get('/:user_id', getUserById);
 
 router.put(
-  '/:user_id', updateTotal);
+  '/:user_id', [auth], updateTotal);
 
 module.exports = router;

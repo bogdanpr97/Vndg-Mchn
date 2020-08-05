@@ -1,0 +1,29 @@
+.money-card {
+  width: 100px;
+  height: 150px;
+  margin: 0 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  border: 3px solid black;
+  cursor: pointer;
+  text-align: center;
+  -webkit-user-select: none; /* Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.green {
+  background-color: green;
+}
+
+.purple {
+  background-color: purple;
+}
+
+.yellow {
+  background-color: rgb(156, 156, 1);
+}

@@ -2,6 +2,7 @@
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 15px;
   box-shadow: black 2px -2px 20px 0px;
   background-color: var(--light-color);
@@ -28,6 +29,15 @@
   text-decoration: none;
   margin-left: 15px;
   border-bottom: 1px solid rgba(1,1,1,0.2);
+}
+
+.money {
+  margin-right: 20px;
+  font-size: 2rem;
+}
+
+.money-value {
+  color: rgb(12, 240, 12);
 }
 
 .link-text {

@@ -4,8 +4,11 @@ import {
   SET_ITEMS,
   SET_ITEMS_FAIL,
   ITEM_UPDATE_QUANT,
-  ITEM_UPDATE_FAIL
+  ITEM_UPDATE_FAIL,
+  ITEM_DELETED
 } from '../actions/types';
+import { addIndex, map, update, findIndex, assoc } from 'ramda'
+const mapIndexed = addIndex(map);
 
 const initialState = {
   posted: false,
@@ -20,23 +23,40 @@ export default function (state = initialState, action) {
       return  {
         ...state,
         items: [...state.items, payload],
+        slots: mapIndexed((item, index) => {
+          if(payload.slot.row !== index) return item;
+          return update(payload.slot.column, payload, item);
+        })(state.slots),
         posted: true
       };
     case SET_ITEMS:
       return {
         ...state,
         items: payload.items,
+        loading: false,
         slots: payload.slots
       }
     case ITEM_UPDATE_QUANT: 
       return {
         ...state,
-        items: state.items.map(item => {
-          if(item._id === payload.itemId) {
-            return {...item, quantity: payload.quantity}
-          }
-          return item;
-        })
+        slots: map(row => {
+          const a = map(item => {
+            if(item && item._id === payload.itemId) return {...item, quantity: payload.quantity}
+            return item;
+          })(row);
+          return a;
+        })(state.slots)
+      };
+    case ITEM_DELETED:
+      return {
+        ...state,
+        slots: map(row => {
+          const a = map(item => {
+            if(item && item._id === payload.itemId) return null;
+            return item;
+          })(row);
+          return a;
+        })(state.slots)
       }
     default:
       return state;

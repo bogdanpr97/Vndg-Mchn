@@ -92,6 +92,7 @@ exports.getUserById = async (req, res) => {
 exports.updateTotal = async (req, res) => {
 
   try {
+    console.log(req.body.amount)
     const user = await User.findById(req.params.user_id);
 
     if (!user) {

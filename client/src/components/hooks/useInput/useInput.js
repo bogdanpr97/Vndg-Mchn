@@ -11,7 +11,7 @@ const useInput = initialValue => {
     value,
     setValue,
     reset: () => setValue(""),
-    onChange
+    onChange,    
   }
 }
 

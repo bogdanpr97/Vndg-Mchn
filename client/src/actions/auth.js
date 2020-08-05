@@ -1,4 +1,12 @@
-import { REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT } from './types';
+import { 
+  REGISTER_SUCCESS, 
+  REGISTER_FAIL, 
+  USER_LOADED, 
+  AUTH_ERROR, 
+  LOGIN_SUCCESS, 
+  LOGIN_FAIL, 
+  LOGOUT,
+  CHANGE_MONEY } from './types';
 import { setAlert } from './alert';
 import api from '../utils/api';
 import setAuthToken from '../utils/setAuthToken';
@@ -77,4 +85,18 @@ export const logout = () => dispatch => {
   setAuthToken();
   dispatch({ type: LOGOUT });
 };
+
+export const changeMoney = ({ userId, value }) => async dispatch => {
+  try {
+    const res = await api.put(`/users/${userId}`, { amount: value });
+
+    dispatch({
+      type: CHANGE_MONEY,
+      payload: { value }
+    })
+
+  } catch (error) {
+    console.log(error);
+  }
+}
 

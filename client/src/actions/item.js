@@ -4,7 +4,9 @@ import {
   SET_ITEMS, 
   SET_ITEMS_FAIL,
   ITEM_UPDATE_QUANT,
-  ITEM_UPDATE_FAIL
+  ITEM_UPDATE_FAIL,
+  ITEM_DELETED,
+  ITEM_DELETED_FAIL
 } from "./types";
 import { setAlert } from "./alert";
 import api from "../utils/api";
@@ -35,7 +37,7 @@ export const getItems = () => async dispatch => {
 
     decodedItems.forEach(element => {
       // busy slot
-      slotsMatrix[element.slot.row][element.slot.column] = 1;
+      slotsMatrix[element.slot.row][element.slot.column] = element;
     });
 
     dispatch({ 
@@ -58,7 +60,7 @@ export const postItem = (item) => async (dispatch) => {
     const res = await axios.post("/api/v1/items", item, config);
     const decodedImage = getDecodedImage(res.data.data.image.data.data/*.data*/); // .data
 
-    dispatch({ 
+    return dispatch({ 
       type: ITEM_POST_SUCCESS,
       payload: {...res.data.data, image: decodedImage }
      });
@@ -82,6 +84,22 @@ export const updateItemQuant = ({ itemId, quantity }) => async dispatch => {
       type: ITEM_UPDATE_QUANT,
       payload: { itemId, quantity }
     });
+  } catch (err) {
+    const errors = err.response && err.response.data.errors;
+    if(errors) {
+      errors.forEach(error => 
+        dispatch(setAlert(error.msg, 'danger')))
+    };
+  }
+}
+
+export const deleteItem = ({ itemId }) => async dispatch => {
+  try {
+    const res = await api.delete(`/items/${itemId}`);
+    dispatch({
+      type: ITEM_DELETED,
+      payload: { itemId }
+    })
   } catch (err) {
     const errors = err.response && err.response.data.errors;
 
