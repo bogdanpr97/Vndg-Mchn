@@ -1,12 +1,8 @@
 import { 
   ITEM_POST_SUCCESS, 
-  ITEM_POST_FAIL, 
   SET_ITEMS, 
-  SET_ITEMS_FAIL,
   ITEM_UPDATE_QUANT,
-  ITEM_UPDATE_FAIL,
   ITEM_DELETED,
-  ITEM_DELETED_FAIL
 } from "./types";
 import { setAlert } from "./alert";
 import api from "../utils/api";
@@ -27,7 +23,6 @@ function getDecodedImage(img) {
 export const getItems = () => async dispatch => {
   try {
     const res = await api.get('/items');
-    const base64Flag = 'data:image/jpeg;base64,';
 
     const decodedItems = res.data.data.map(item => {
       item.image = getDecodedImage(item.image.data.data);
@@ -79,7 +74,7 @@ export const postItem = (item) => async (dispatch) => {
 
 export const updateItemQuant = ({ itemId, quantity }) => async dispatch => {
   try {
-    const res = await api.put(`/items/${itemId}`, { quantity });
+    await api.put(`/items/${itemId}`, { quantity });
     dispatch({ 
       type: ITEM_UPDATE_QUANT,
       payload: { itemId, quantity }
@@ -95,7 +90,7 @@ export const updateItemQuant = ({ itemId, quantity }) => async dispatch => {
 
 export const deleteItem = ({ itemId }) => async dispatch => {
   try {
-    const res = await api.delete(`/items/${itemId}`);
+    await api.delete(`/items/${itemId}`);
     dispatch({
       type: ITEM_DELETED,
       payload: { itemId }

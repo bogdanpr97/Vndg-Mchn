@@ -11,7 +11,9 @@ const Money = ({ addMoneyToUser, value, color }) => {
 }
 
 Money.propTypes = {
-
+  addMoneyToUser: PropTypes.func.isRequired,
+  value: PropTypes.number,
+  color: PropTypes.string,
 }
 
 export default Money

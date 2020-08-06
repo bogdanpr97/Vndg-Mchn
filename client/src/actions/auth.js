@@ -88,7 +88,7 @@ export const logout = () => dispatch => {
 
 export const changeMoney = ({ userId, value }) => async dispatch => {
   try {
-    const res = await api.put(`/users/${userId}`, { amount: value });
+    await api.put(`/users/${userId}`, { amount: value });
 
     dispatch({
       type: CHANGE_MONEY,

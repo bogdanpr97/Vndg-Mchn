@@ -1,13 +1,10 @@
 import { 
   ITEM_POST_SUCCESS, 
-  ITEM_POST_FAIL,
   SET_ITEMS,
-  SET_ITEMS_FAIL,
   ITEM_UPDATE_QUANT,
-  ITEM_UPDATE_FAIL,
   ITEM_DELETED
 } from '../actions/types';
-import { addIndex, map, update, findIndex, assoc } from 'ramda'
+import { addIndex, map, update } from 'ramda'
 const mapIndexed = addIndex(map);
 
 const initialState = {

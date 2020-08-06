@@ -23,6 +23,8 @@ const SlotMachine = ({ slots, handleBuyItem }) => {
   );
 };
 
-SlotMachine.propTypes = {};
+SlotMachine.propTypes = {
+  handleBuyItem: PropTypes.func.isRequired,
+};
 
 export default SlotMachine;
